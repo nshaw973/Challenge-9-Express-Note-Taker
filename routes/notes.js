@@ -21,7 +21,7 @@ notes.get('/:id', (req, res) => {
             return result.length > 0
 
             ? res.json(result)
-            : res.json('No note with that ID');
+            : res.json(console.log('No note with that ID'));
 
     });
 });
@@ -39,14 +39,13 @@ notes.delete('/:id', (req, res) => {
         
         writeToFile('./db/db.json', result);
   
-        res.json(`Item ${noteId} has been deleted`);
+        res.json(console.log(`Item ${noteId} has been deleted`));
       });
   });
 
 
 //This adds the title and text the user typed out, into the db/db.json file
 notes.post('/', (req, res) => {
-  console.log(req.body);
 
   const { title, text } = req.body;
 
@@ -58,9 +57,9 @@ notes.post('/', (req, res) => {
     };
 
     readAndAppend(newNote, './db/db.json');
-    res.json(`note added successfully`);
+    res.json(console.log(`Note added successfully`));
   } else {
-    res.error('Error in adding note');
+    res.error(console.log('Error in adding note'));
   }
 });
 
