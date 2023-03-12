@@ -26,6 +26,22 @@ notes.get('/:id', (req, res) => {
     });
 });
 
+//Deletes the note after clicking on the trashcan symbol
+notes.delete('/:id', (req, res) => {
+    //selects the id given to the paramter that was an element inside the button with the note id
+    const noteId = req.params.id;
+    //grabbing the data from the database
+    readFromFile('./db/db.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        //it only grabs the data back for everything that did not contain that id#
+        const result = json.filter((note) => note.id !== noteId);
+        
+        writeToFile('./db/db.json', result);
+  
+        res.json(`Item ${noteId} has been deleted`);
+      });
+  });
 
 
 //This adds the title and text the user typed out, into the db/db.json file
