@@ -9,15 +9,14 @@ notes.get('/', (req, res) => {
   });
 
 //Allows user to search up specific note with id.
-notes.get('/:note_id', (req, res) => {
-
-    const noteId = req.params.note_id;
+notes.get('/:id', (req, res) => {
+    const noteId = req.params.id;
 
         readFromFile('./db/db.json')
         .then((data) => JSON.parse(data))
         .then((json) => {
 
-            const result = json.filter((note) => note.note_id === noteId);
+            const result = json.filter((note) => note.id === noteId);
 
             return result.length > 0
 
@@ -26,6 +25,8 @@ notes.get('/:note_id', (req, res) => {
 
     });
 });
+
+
 
 //This adds the title and text the user typed out, into the db/db.json file
 notes.post('/', (req, res) => {
@@ -37,7 +38,7 @@ notes.post('/', (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNote, './db/db.json');
