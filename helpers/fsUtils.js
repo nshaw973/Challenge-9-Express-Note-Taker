@@ -1,7 +1,11 @@
 const fs = require('fs');
 const util = require('util');
 
+//All this was taken straight out of the mini project.
+
+//turns the fs.readFile into a promise-based function
 const readFromFile = util.promisify(fs.readFile);
+
 
 const writeToFile = (destination, content) =>
   fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>

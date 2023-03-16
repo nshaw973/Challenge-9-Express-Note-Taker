@@ -1,6 +1,7 @@
 const notes = require('express').Router();
+//uuidv4 is being used to create the unique ids, grabbed from npm.
 const { v4: uuidv4 } = require('uuid');
-
+//fsUtils functions
 const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 
 //Grabs the data in the db/db.json file and repopulates the page with it.
@@ -37,6 +38,7 @@ notes.delete('/:id', (req, res) => {
         //it only grabs the data back for everything that did not contain that id#
         const result = json.filter((note) => note.id !== noteId);
         
+        //overwrites the current db.json with the new results without the deleted note.
         writeToFile('./db/db.json', result);
   
         res.json(console.log(`Item ${noteId} has been deleted`));
