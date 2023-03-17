@@ -10,6 +10,7 @@ notes.get('/', (req, res) => {
   });
 
 //Allows user to search up specific note with id.
+//add /api/notes/(notes id number) to get the specific id to show up on the browser.
 notes.get('/:id', (req, res) => {
     const noteId = req.params.id;
 
@@ -19,7 +20,7 @@ notes.get('/:id', (req, res) => {
 
             const result = json.filter((note) => note.id === noteId);
 
-            return result.length > 0
+            return result
 
             ? res.json(result)
             : res.json(console.log('No note with that ID'));
@@ -51,6 +52,7 @@ notes.post('/', (req, res) => {
 
   const { title, text } = req.body;
 
+  //if the request has a body, then create a new const object with the parameters.
   if (req.body) {
     const newNote = {
       title,

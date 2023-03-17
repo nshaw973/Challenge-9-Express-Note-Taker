@@ -3,6 +3,7 @@ const path = require('path');
 const api = require('./routes/index.js');
 const db = require('./db/db.json')
 
+//selects the host being the one that was given by heroku, or 3001 if its done through the localhost
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -36,6 +37,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
 })
 
+//Express listens for the port it's given and checks for any gets, posts, and deletes.
 app.listen(PORT, () => {
     console.log(`App listening at http://localhost:${PORT}`);
 })
